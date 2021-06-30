@@ -1,2 +1,2 @@
-# javaAutomationTestingWebExamples
+# Java automation testing web
 This repository contains a serie of examples of automation web testing using differents patterns like Screenplay  and POM. Also here you could find examples of automation with differents technologies, tools and languges like Java; Gradle; Gherking, Cucumber; JUnit, etc. and alogn more about it. The little projects here is only a reference in how to use and combine differents technologies for autmation testing and is a reference for everyone wanna learn a bit more.
