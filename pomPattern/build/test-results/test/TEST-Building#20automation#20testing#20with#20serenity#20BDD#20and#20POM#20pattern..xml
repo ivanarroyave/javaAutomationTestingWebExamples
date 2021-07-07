@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Building automation testing with serenity BDD and POM pattern." tests="3" skipped="0" failures="0" errors="0" timestamp="2021-07-07T07:33:49" hostname="DESKTOP-G32FPN8" time="0.32">
+  <properties/>
+  <testcase name="Text Box section" classname="Building automation testing with serenity BDD and POM pattern." time="0.295"/>
+  <testcase name="Text Box section" classname="Building automation testing with serenity BDD and POM pattern." time="0.013"/>
+  <testcase name="Text Box section" classname="Building automation testing with serenity BDD and POM pattern." time="0.012"/>
+  <system-out><![CDATA[Step argument class io.cucumber.core.gherkin.vintage.GherkinVintageDataTableArgument
+Step argument class io.cucumber.core.gherkin.vintage.GherkinVintageDataTableArgument
+Step argument class io.cucumber.core.gherkin.vintage.GherkinVintageDataTableArgument
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
