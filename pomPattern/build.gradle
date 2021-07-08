@@ -1,34 +1,83 @@
-plugins {
-    id 'java'
-    id 'idea'
-    id 'java-library'
-}
-
-group 'co.com.example'
+group'co.com.company'
 version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'java-library'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+apply plugin: 'org.sonarqube'
+
+/*test {
+    systemProperty 'afcUser', System.getProperty('afcUser')
+    systemProperty 'afcPassword', System.getProperty('afcPassword')
+
+    systemProperty 'dataBaseDriverType', System.getProperty('dataBaseDriverType')
+    systemProperty 'dataBaseServer', System.getProperty('dataBaseServer')
+    systemProperty 'dataBasePortNumber', System.getProperty('dataBasePortNumber')
+    systemProperty 'dataBaseSID', System.getProperty('dataBaseSID')
+    systemProperty 'dataBaseServiceName', System.getProperty('dataBaseServiceName')
+    systemProperty 'dataBaseUser', System.getProperty('dataBaseUser')
+    systemProperty 'dataBasePassword', System.getProperty('dataBasePassword')
+}*/
+
+tasks.withType(Test){
+    systemProperties = System.properties
+    maxParallelForks = Runtime.runtime.availableProcessors()
+    //maxParallelForks = 1
+}
 
 repositories {
     mavenCentral()
 }
 
-ext{
-    serenityVersion = '2.2.9'
-    serenityCucumberVersion = '2.2.6'
-    log4jVersion = '2.11.2'
-    junitVersion = '4.12'
+buildscript {
+    repositories{
+        mavenCentral()
+    }
+    dependencies{
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.2.12")
+        classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.0")
+        classpath "net.serenity-bdd:serenity-single-page-report:2.2.12"
+    }
 }
 
-dependencies {
-    implementation group: 'org.apache.logging.log4j', name: 'log4j', version: log4jVersion
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: log4jVersion
-    implementation group: 'junit', name: 'junit', version: junitVersion
+serenity {
+    reports = ["single-page-html"]
+}
 
-    //Look at https://mvnrepository.com/ and search for net.serenity-bdd and use the most resents dependencies.
-    implementation group: 'net.serenity-bdd', name: 'serenity-core', version: serenityVersion
-    implementation group: 'net.serenity-bdd', name: 'serenity-junit', version: serenityVersion
-    implementation group: 'net.serenity-bdd', name: 'serenity-assertions', version: serenityVersion
-    implementation group: 'net.serenity-bdd', name: 'serenity-ensure', version: serenityVersion
-    implementation group: 'net.serenity-bdd', name: 'serenity-cucumber5', version: serenityCucumberVersion
+ext {
+    serenityVersion = '2.2.9'
+    serenityCucumberVersion = '2.2.6'
+    apachePoiVersion = '3.17'
+}
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+dependencies {
+    implementation group: 'net.serenity-bdd',                 name: 'serenity-core',                 version: serenityVersion
+    implementation group: 'net.serenity-bdd',                 name: 'serenity-junit',                version: serenityVersion
+    implementation group: 'net.serenity-bdd',                 name: 'serenity-screenplay',           version: serenityVersion
+    implementation group: 'net.serenity-bdd',                 name: 'serenity-screenplay-webdriver', version: serenityVersion
+    implementation group: 'net.serenity-bdd', name: 'serenity-single-page-report',   version: serenityVersion
+    implementation group: 'net.serenity-bdd', name: 'serenity-assertions',           version: serenityVersion
+    implementation group: 'net.serenity-bdd', name: 'serenity-ensure',               version: serenityVersion
+    implementation group: 'net.serenity-bdd', name: 'serenity-cucumber5',            version: serenityCucumberVersion
+
+    implementation group: 'net.serenity-bdd', name: 'serenity-screenplay-rest', version: serenityVersion
+
+
+    implementation group: 'org.apache.poi',                   name: 'poi-ooxml',                     version: apachePoiVersion
+
+    implementation group: 'com.oracle.database.jdbc', name: 'ojdbc10', version: '19.11.0.0'
+
+    implementation        group: 'com.ibm.mq',                       name: 'com.ibm.mq.allclient',          version: '9.1.1.0'
+    testImplementation group: 'junit',       name: 'junit',        version: '4.12'
+    implementation group: 'log4j',                            name: 'log4j',                         version: '1.2.17'
+    implementation group: 'com.sikulix', name: 'sikulixapi', version: '2.0.4'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.3'
+    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.11.3'
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.11.3"
 }
 
 gradle.startParameter.continueOnFailure = true
