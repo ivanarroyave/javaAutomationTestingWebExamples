@@ -31,19 +31,19 @@ public class PracticeForm extends PageObject {
 
     public static final Target GENDER_MALE = Target
             .the("Gender male")
-            .located(id("gender-radio-1"));
+            .located(xpath("//*[@id=\"genterWrapper\"]/div[2]/div[1]/label"));
 
     public static final Target GENDER_FEMALE = Target
             .the("Gender female")
-            .located(id("gender-radio-2"));
+            .located(xpath("//*[@id=\"genterWrapper\"]/div[2]/div[2]/label"));
 
     public static final Target GENDER_OTHER = Target
             .the("Gender other")
-            .located(id("gender-radio-3"));
+            .located(xpath("//*[@id=\"genterWrapper\"]/div[2]/div[3]/label"));
 
     public static final Target MOBILE = Target
             .the("Mobile")
-            .located(id("gender-radio-3"));
+            .located(id("userNumber"));
 
     public static final Target SUBMIT = Target
             .the("Submit")

@@ -1,4 +1,4 @@
-package co.com.screenplay.tasks.practiceform;
+package co.com.screenplay.tasks.landingpage;
 
 import co.com.screenplay.userinterfaces.landingpage.LandingPage;
 import net.serenitybdd.screenplay.Actor;
