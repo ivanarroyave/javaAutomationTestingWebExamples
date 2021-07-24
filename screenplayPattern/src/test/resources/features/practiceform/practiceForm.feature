@@ -15,3 +15,4 @@ Feature: Automation testing using Screenplay pattern.
 Examples:
     |firstName|lastName|gender|mobile|
     |Iván     |Arroyave|Male  |1234567890|
+
