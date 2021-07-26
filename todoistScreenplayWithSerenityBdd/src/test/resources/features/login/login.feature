@@ -11,4 +11,4 @@ Feature: Test for Todoist.com
   Then the user sould see the the Add task page
       Examples:
           |user|password|
-          |wl.interview.session@gmail.com|WL2021&*|
+          |Insert a valid user|insert a valida password|

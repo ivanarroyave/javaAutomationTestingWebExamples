@@ -1,4 +1,4 @@
-package org.example.login.runners;
+package org.example.runners.login;
 
 import io.cucumber.junit.CucumberOptions;
 import io.cucumber.junit.CucumberSerenityRunner;
@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         snippets = CucumberOptions.SnippetType.CAMELCASE,
         features = {"src/test/resources/features/login/login.feature"},
-        glue = {"org.example.login.stepdefinitions"}
+        glue = {"org.example.stepdefinitions.login"}
 )
 public class Login {
 }

@@ -1,4 +1,4 @@
-package org.example.login.stepdefinitions;
+package org.example.stepdefinitions.setup;
 
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actors.OnStage;
@@ -9,11 +9,12 @@ import org.openqa.selenium.WebDriver;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 
 public class Setup {
+
     @Managed
     protected WebDriver webDriver;
 
     private void setUpBrowser(){
-        //webDriver.manage().window().maximize();
+        webDriver.manage().window().maximize();
     }
 
     private void TheUser(String user, WebDriver webDriver){
@@ -21,8 +22,8 @@ public class Setup {
         theActorCalled(user).can(BrowseTheWeb.with(webDriver));
     }
 
-    public void generalSetup(){
+    public void generalSetup(String name){
         setUpBrowser();
-        TheUser("Dario", webDriver);
+        TheUser(name, webDriver);
     }
 }

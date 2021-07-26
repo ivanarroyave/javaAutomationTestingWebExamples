@@ -1,9 +1,10 @@
-package org.example.login.stepdefinitions;
+package org.example.stepdefinitions.login;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.exceptions.ValidationOnPage;
+import org.example.stepdefinitions.setup.Setup;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
@@ -15,11 +16,13 @@ import static org.example.userinterfaces.login.Login.TODAY;
 import static org.example.util.BooleanConvertion.EXISTING;
 import static org.hamcrest.Matchers.is;
 
-public class Login extends Setup{
+public class LoginStepDefinition extends Setup {
+
+    private static final String ACTOR_NAME = "Dario";
 
     @Given("the user is on landing page")
     public void theUserIsOnLandingPage() {
-        generalSetup();
+        generalSetup(ACTOR_NAME);
         theActorInTheSpotlight().attemptsTo(
                 goToLandingPage()
         );
