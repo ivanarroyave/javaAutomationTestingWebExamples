@@ -1,0 +1,9 @@
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">
+    <soap:Header/>
+    <soap:Body>
+        <tem:Add>
+            <tem:intA>[intA]</tem:intA>
+            <tem:intB>[intB]</tem:intB>
+        </tem:Add>
+    </soap:Body>
+</soap:Envelope>
