@@ -13,9 +13,13 @@ public class BrowseToPracticeForm implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
+            Scroll.to(ELEMENTS),
             Click.on(ELEMENTS),
+
             Scroll.to(FORMS),
             Click.on(FORMS),
+
+            Scroll.to(PRACTICE_FORM),
             Click.on(PRACTICE_FORM)
         );
     }

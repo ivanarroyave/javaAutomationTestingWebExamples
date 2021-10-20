@@ -40,16 +40,32 @@ public class FillPracticeForm implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
+                Scroll.to(FIRST_NAME),
                 Enter.theValue(this.firstName).into(FIRST_NAME),
+
+                Scroll.to(LAST_NAME),
                 Enter.theValue(this.lastName).into(LAST_NAME),
+
                 Check.whether(MALE.getValue().equals(this.gender))
-                        .andIfSo(Click.on(GENDER_MALE))
+                        .andIfSo(
+                                Scroll.to(GENDER_MALE),
+                                Click.on(GENDER_MALE)
+                        )
                         .otherwise(
                                 Check.whether(FEMALE.getValue().equals(this.gender))
-                                    .andIfSo(Click.on(GENDER_FEMALE))
-                                    .otherwise(Click.on(GENDER_OTHER))
+                                    .andIfSo(
+                                            Scroll.to(GENDER_FEMALE),
+                                            Click.on(GENDER_FEMALE)
+                                    )
+                                    .otherwise(
+                                            Scroll.to(GENDER_OTHER),
+                                            Click.on(GENDER_OTHER)
+                                    )
                         ),
+
+                Scroll.to(MOBILE),
                 Enter.theValue(this.mobile).into(MOBILE),
+
                 Scroll.to(SUBMIT),
                 Click.on(SUBMIT)
         );
