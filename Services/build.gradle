@@ -1,0 +1,69 @@
+group 'co.com.sofka'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'java-library'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+apply plugin: 'org.sonarqube'
+
+tasks.withType(Test){
+    systemProperties = System.properties
+    maxParallelForks = Runtime.runtime.availableProcessors()
+}
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+    repositories{
+        mavenCentral()
+    }
+    dependencies{
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.2.12")
+        classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.0")
+        classpath "net.serenity-bdd:serenity-single-page-report:2.2.12"
+    }
+}
+
+ext {
+    serenityVersion = '2.2.9'
+    serenityCucumberVersion = '2.2.6'
+    apachePoiVersion = '3.17'
+}
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+dependencies {
+    implementation group: 'net.serenity-bdd',                 name: 'serenity-core',                 version: serenityVersion
+    implementation group: 'net.serenity-bdd',                 name: 'serenity-junit',                version: serenityVersion
+    implementation group: 'net.serenity-bdd',                 name: 'serenity-screenplay',           version: serenityVersion
+    implementation group: 'net.serenity-bdd',                 name: 'serenity-screenplay-webdriver', version: serenityVersion
+    implementation group: 'net.serenity-bdd', name: 'serenity-single-page-report',   version: serenityVersion
+    implementation group: 'net.serenity-bdd', name: 'serenity-assertions',           version: serenityVersion
+    implementation group: 'net.serenity-bdd', name: 'serenity-ensure',               version: serenityVersion
+
+    implementation group: 'net.serenity-bdd', name: 'serenity-cucumber5',            version: serenityCucumberVersion
+
+    implementation group: 'net.serenity-bdd', name: 'serenity-screenplay-rest', version: serenityVersion
+
+
+    implementation group: 'org.apache.poi',                   name: 'poi-ooxml',                     version: apachePoiVersion
+    implementation 'com.oracle.database.jdbc:ojdbc10:19.11.0.0'
+    implementation        group: 'com.ibm.mq',                       name: 'com.ibm.mq.allclient',          version: '9.1.1.0'
+    implementation group: 'junit',       name: 'junit',        version: '4.12'
+    implementation group: 'log4j',                            name: 'log4j',                         version: '1.2.17'
+    implementation group: 'com.sikulix', name: 'sikulixapi', version: '2.0.4'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.3'
+    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.11.3'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.0'
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+gradle.startParameter.continueOnFailure = true
