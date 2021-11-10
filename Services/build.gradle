@@ -62,8 +62,10 @@ dependencies {
 
 }
 
+/*
 test {
     useJUnitPlatform()
 }
+*/
 
 gradle.startParameter.continueOnFailure = true
