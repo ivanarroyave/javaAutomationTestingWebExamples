@@ -7,13 +7,15 @@ import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
 import net.serenitybdd.screenplay.rest.interactions.Post;
 import net.serenitybdd.screenplay.rest.questions.LastResponse;
 import org.apache.http.HttpStatus;
+import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 
 import static co.com.sofka.questions.ReturnStringValue.systemValue;
+import static co.com.sofka.util.Log4jValues.LOG4J_PROPERTIES_FILE_PATH;
+import static com.google.common.base.StandardSystemProperty.USER_DIR;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.rest.questions.ResponseConsequence.seeThatResponse;
 import static org.hamcrest.CoreMatchers.containsString;
@@ -23,6 +25,8 @@ public class AddTest extends SetUp {
 
     @Test
     public void testAdd(){
+        PropertyConfigurator.configure(USER_DIR.value() + LOG4J_PROPERTIES_FILE_PATH.getValue());
+
         String bodyRequest = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\">\n" +
                 "   <soapenv:Header/>\n" +
                 "   <soapenv:Body>\n" +
@@ -45,6 +49,7 @@ public class AddTest extends SetUp {
                         )
         );
 
+        LastResponse.received().answeredBy(actor).prettyPrint();
         String soapResponse = new String(LastResponse.received().answeredBy(actor).asByteArray(), StandardCharsets.UTF_8);
 
         actor.should(

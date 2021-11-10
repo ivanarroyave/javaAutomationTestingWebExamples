@@ -4,9 +4,14 @@ import co.com.sofka.stepdefnitions.soap.calculator.SetUp;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import net.serenitybdd.screenplay.rest.questions.LastResponse;
+import org.apache.log4j.PropertyConfigurator;
+
 import static co.com.sofka.questions.ReturnStringValue.systemValue;
 import static co.com.sofka.tasks.calculator.DoPost.doPost;
 import static co.com.sofka.util.FileUtilities.readFile;
+import static co.com.sofka.util.Log4jValues.LOG4J_PROPERTIES_FILE_PATH;
+import static com.google.common.base.StandardSystemProperty.USER_DIR;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.rest.questions.ResponseConsequence.seeThatResponse;
 import static org.apache.http.HttpStatus.SC_OK;
@@ -20,6 +25,7 @@ public class AddWithCucumberStepDefinition extends SetUp {
 
     @Given("que el usuario de la calculadora ha definido como sumandos el {int} y el {int}")
     public void queElUsuarioDeLaCalculadoraHaDefinidoComoSumandosElYEl(Integer intA, Integer intB) {
+        PropertyConfigurator.configure(USER_DIR.value() + LOG4J_PROPERTIES_FILE_PATH.getValue());
         setUp();
         bodyRequest = defineBodyRequest(intA, intB);
     }
@@ -36,6 +42,7 @@ public class AddWithCucumberStepDefinition extends SetUp {
 
     @Then("el ususario debería obtener el resultado {int}")
     public void elUsusarioDeberiaObtenerElResultado(Integer total) {
+        LastResponse.received().answeredBy(actor).prettyPrint();
         actor.should(
                 seeThatResponse(
                         "El código de respuesta HTTP debe ser: " + SC_OK,
