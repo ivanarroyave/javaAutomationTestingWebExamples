@@ -49,7 +49,6 @@ public class AddTest extends SetUp {
                         )
         );
 
-        LastResponse.received().answeredBy(actor).prettyPrint();
         String soapResponse = new String(LastResponse.received().answeredBy(actor).asByteArray(), StandardCharsets.UTF_8);
 
         actor.should(

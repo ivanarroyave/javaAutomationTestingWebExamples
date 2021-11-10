@@ -42,7 +42,6 @@ public class AddWithCucumberStepDefinition extends SetUp {
 
     @Then("el ususario debería obtener el resultado {int}")
     public void elUsusarioDeberiaObtenerElResultado(Integer total) {
-        LastResponse.received().answeredBy(actor).prettyPrint();
         actor.should(
                 seeThatResponse(
                         "El código de respuesta HTTP debe ser: " + SC_OK,
